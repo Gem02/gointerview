@@ -1,6 +1,5 @@
 import Image from "next/image";
 import BannerSection from "./_components/banner";
-import Testimonials from "./_components/testimonials";
 import StartMethod from "./_components/startMethod";
 import InterviewMindset from "./_components/InterviewMindset";
 import WhyUs from "./_components/Why-us";

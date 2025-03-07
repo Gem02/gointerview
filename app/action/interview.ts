@@ -132,8 +132,9 @@ export const getInterviewAnswer = async (
 
     return { success: true, response: result };
   } catch (error) {
-     return { success: false, error: "Error fetching interview feedback." };
+    if (error)  return { success: false, error: "Error fetching interview feedback." };
   }
+  return {success: false}
 };
 
 export const getInterviewList = async (
@@ -152,8 +153,9 @@ export const getInterviewList = async (
 
     return { success: false, error: "No interviews found" };
   } catch (error) {
-    return { success: false, error: "Sorry! Something went wrong" };
+    if (error) return { success: false, error: "Sorry! Something went wrong" };
   }
+  return { success: false };
 };
 
 export const deleteInterview = async (mockId: string) => { 
@@ -168,7 +170,6 @@ export const deleteInterview = async (mockId: string) => {
       return false; 
     }
   } catch (error) {
-   // console.error("Error deleting interview:", error);
-    return false;  
+    if (error) return false;  
   }
 };

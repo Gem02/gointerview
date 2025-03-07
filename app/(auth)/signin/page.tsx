@@ -1,15 +1,15 @@
 "use client"
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { signIn } from "next-auth/react";
 
 const SignInPage = () => {
-  const [email, setEmail] = useState('');
+  /* const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); */
 
-  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+/*   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -22,7 +22,7 @@ const SignInPage = () => {
       console.error("Login failed", error);
     }
     setLoading(false);
-  };
+  }; */
   
 
   return (
