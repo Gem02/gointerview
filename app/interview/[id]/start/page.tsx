@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { getInterviewDetails } from "@/app/action/interview";
 import QuestionSection from "./_components/questionSection";
@@ -8,15 +6,13 @@ import RecordAnswer from "./_components/RecordAnswer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-
 interface MockQuestion {
   question: string;
   answer: string;
 }
 
-
 interface InterviewData {
-  jsonMockResp: string; 
+  jsonMockResp: string;
   jobPosition: string;
   jobDesc: string;
   jobExperience: string;
@@ -28,7 +24,7 @@ interface InterviewData {
 const Page = () => {
   const params = useParams();
   const interviewId = Array.isArray(params?.id) ? params.id[0] : params?.id;
-  const [mockInterviewQuestion, setMockInterviewQuestion] = useState<MockQuestion[]>([]); 
+  const [mockInterviewQuestion, setMockInterviewQuestion] = useState<MockQuestion[]>([]);
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(0);
   const [interviewData, setInterviewData] = useState<InterviewData>({
     jsonMockResp: "",
@@ -39,20 +35,13 @@ const Page = () => {
     createdAt: null,
     mockId: "",
   });
+
   
-
-  useEffect(() => {
-
-      fetchData();
-
-  }, [interviewId]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (interviewId && typeof interviewId === "string") {
-      
       try {
         const response = await getInterviewDetails(interviewId);
-        
+
         if (response?.result) {
           setInterviewData(response.result);
 
@@ -61,14 +50,18 @@ const Page = () => {
             setMockInterviewQuestion(parsedQuestions);
           } catch (error) {
             console.error("Error parsing mock interview questions:", error);
-            setMockInterviewQuestion([]); 
+            setMockInterviewQuestion([]);
           }
         }
       } catch (error) {
         console.error("Error fetching interview details:", error);
       }
     }
-  };
+  }, [interviewId]); 
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]); 
 
   return (
     <div>
@@ -90,17 +83,19 @@ const Page = () => {
         </div>
       </div>
 
-
-      <div className='flex justify-end gap-6'>
-          {activeQuestionIndex > 0 &&  
-          <Button onClick={()=>setActiveQuestionIndex(activeQuestionIndex-1)}>Previous Question</Button>}
-          {activeQuestionIndex!=mockInterviewQuestion?.length-1&& 
-           <Button onClick={()=>setActiveQuestionIndex(activeQuestionIndex+1)}>Next Question</Button>}
-          {activeQuestionIndex==mockInterviewQuestion?.length-1&&  
+      <div className="flex justify-end gap-6">
+        {activeQuestionIndex > 0 && (
+          <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>Previous Question</Button>
+        )}
+        {activeQuestionIndex !== mockInterviewQuestion?.length - 1 && (
+          <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>Next Question</Button>
+        )}
+        {activeQuestionIndex === mockInterviewQuestion?.length - 1 && (
           <Link href={`/dashboard/interview/${interviewData?.mockId}/feedback`}>
-            <Button >End Interview</Button>
-          </Link>} 
-        </div>
+            <Button>End Interview</Button>
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
