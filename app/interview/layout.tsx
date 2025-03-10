@@ -1,3 +1,5 @@
+"use client"
+
 import Navbar from '@/components/Navbar';
 import React, {useEffect} from 'react';
 import { useSession } from "next-auth/react";

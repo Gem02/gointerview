@@ -1,4 +1,4 @@
-"use client"; // Mark this as a Client Component
+"use client"; 
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
