@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 // Log the NEXTAUTH_SECRET to verify it's being passed correctly
-console.log("NEXTAUTH_SECRET in auth.ts:", process.env.NEXTAUTH_SECRET);
+console.log("NEXTAUTH_SECRET in auth.ts:", process.env.NEXT_PUBLIC_NEXTAUTH_SECRET);
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -41,6 +41,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   },
 
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
 });
