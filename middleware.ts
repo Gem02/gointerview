@@ -3,6 +3,9 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
+  // Log the NEXTAUTH_SECRET to verify it's being passed correctly
+  console.log("NEXTAUTH_SECRET in middleware:", process.env.NEXTAUTH_SECRET);
+
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const { pathname } = req.nextUrl;
 

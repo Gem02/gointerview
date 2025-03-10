@@ -1,6 +1,9 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
+// Log the NEXTAUTH_SECRET to verify it's being passed correctly
+console.log("NEXTAUTH_SECRET in auth.ts:", process.env.NEXTAUTH_SECRET);
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     GoogleProvider({
