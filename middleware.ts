@@ -6,7 +6,11 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const { pathname } = req.nextUrl;
 
+  console.log("Token in middleware:", token); // Log the token
+  console.log("Pathname in middleware:", pathname); // Log the pathname
+
   if (!token) {
+    console.log("No token found, redirecting to /signin"); // Log no token
     if (pathname === "/signin" || pathname === "/signup") {
       return NextResponse.next();
     }
@@ -14,9 +18,11 @@ export async function middleware(req: NextRequest) {
   }
 
   if (token && (pathname === "/signin" || pathname === "/signup")) {
+    console.log("Token found, redirecting to /dashboard"); // Log token found
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
+  console.log("Token found, allowing access to:", pathname); // Log access granted
   return NextResponse.next();
 }
 
