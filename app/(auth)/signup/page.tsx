@@ -1,9 +1,20 @@
 "use client"
 import Link from 'next/link'
-import React from 'react'
+import React, {useEffect} from 'react'
 import SigninBtn from '../_components/button';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
-const page = () => {
+const Page = () => {
+    const {data: session, status} = useSession();
+    const router = useRouter();
+
+    useEffect(() =>{
+        if (status === 'loading') return;
+        if (session) {
+            router.push('/dashboard');
+        }
+    }, [session, status, router])
   return (
     <div className="w-full lg:w-1/2 xl:w-5/12 m-auto p-6 sm:p-12">
 
@@ -31,4 +42,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
