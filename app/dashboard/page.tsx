@@ -8,16 +8,15 @@ import { useEffect } from "react";
 
 const Page = () => {
   
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
   // Redirect if the user is not authenticated
   useEffect(() => {
-    if (status === "loading") return; // Wait for session to load
     if (!session) {
       router.push("/signin"); // Redirect to signin if not authenticated
     }
-  }, [session, status, router]);
+  }, [session, router]);
 
   return (
     <div>

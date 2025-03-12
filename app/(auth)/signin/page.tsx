@@ -7,16 +7,16 @@ import { useRouter } from 'next/navigation';
 import SigninBtn from '../_components/button';
 
 const SignInPage = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
   
   useEffect(() => {
-    if (status === "loading") return; 
+    
     if (session) {
       router.push("/dashboard"); 
     }
-  }, [session, status, router]);
+  }, [session, router]);
 
   
 
