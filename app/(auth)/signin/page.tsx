@@ -18,15 +18,7 @@ const SignInPage = () => {
     }
   }, [session, status, router]);
 
-  // Show a loading state while checking the session
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
-
-  // If the user is authenticated, don't render the sign-in page
-  if (session) {
-    return null; // Redirecting, so no need to render anything
-  }
+  
 
   return (
     <div className="lg:w-1/2 xl:w-5/12 m-auto w-full p-6 sm:p-12">

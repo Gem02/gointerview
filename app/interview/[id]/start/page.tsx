@@ -7,6 +7,8 @@ import QuestionSection from "./_components/questionSection";
 import RecordAnswer from "./_components/RecordAnswer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface MockQuestion {
   question: string;
@@ -38,6 +40,14 @@ const Page = () => {
     mockId: "",
   });
 
+   const { data: session, status } = useSession();
+      const router = useRouter();
+  useEffect(() => {
+        if (status === "loading") return; // Wait for session to load
+        if (!session) {
+          router.push("/signin"); // Redirect to signin if not authenticated
+        }
+  }, [session, status, router]);
   
   const fetchData = useCallback(async () => {
     if (interviewId && typeof interviewId === "string") {

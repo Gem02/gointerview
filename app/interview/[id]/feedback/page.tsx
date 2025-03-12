@@ -11,12 +11,21 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { ChevronsUpDown } from 'lucide-react';
+import { useSession } from "next-auth/react";
 
 const Page = () => {
 
   const router=useRouter();
   const {id} = useParams();
   const [interviewAnswer, setInterviewAnswer] = useState<UserAnswerData[]>([]);
+
+  const { data: session, status } = useSession();
+    useEffect(() => {
+          if (status === "loading") return; // Wait for session to load
+          if (!session) {
+            router.push("/signin"); // Redirect to signin if not authenticated
+          }
+    }, [session, status, router]);
 
   useEffect(() =>{
     getAnswer()
