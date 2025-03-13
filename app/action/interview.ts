@@ -2,7 +2,7 @@
 
 import { saveAnswer, saveInterview } from "@/utils/interviewService";
 import { chatSession } from "@/utils/GeminiAiModel";
-import { auth } from "@/auth";
+import { auth } from "@/auth/authSetup";
 import { db } from "@/utils/db";
 import { MockInterview, UserAnswer } from "@/utils/schema";
 import { desc, eq } from "drizzle-orm";
