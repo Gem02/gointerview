@@ -77,7 +77,7 @@ const Page = () => {
 
   return (
     <div>
-      <div className="flex flex-col-reverse sm:flex-row gap-10 items-start">
+      <div className="flex flex-col-reverse sm:flex-row sm:gap-10 items-start">
         <div className="flex-1 min-h-[300px] overflow-auto">
           <QuestionSection
             mockInterviewQuestion={mockInterviewQuestion}

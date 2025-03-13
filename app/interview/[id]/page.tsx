@@ -73,20 +73,20 @@ const Page: React.FC<PageProps> = ({ params }) => {
 
   return (
     <div>
-      <h2 className="text-3xl font-semibold text-slate-700">Interview</h2>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <h2 className="sm:text-3xl text-2xl font-semibold text-slate-700">Interview</h2>
+      <section className="md:grid flex flex-col-reverse md:grid-cols-2 gap-3">
         {/* Left Section - Job Info */}
         <div className="flex flex-col my-7 gap-5">
-          <div className="flex flex-col p-5 rounded-lg border gap-5">
-            <h2 className="text-lg flex items-center gap-2 line-clamp-1">
-              <strong>Job Role/Job Position:</strong>
+          <div className="flex flex-col p-3 rounded-lg border gap-2">
+            <h2 className="text-base flex items-center gap-2 line-clamp-1">
+              <strong>Job Position:</strong>
               {interviewData?.jobPosition || <Skeleton className="w-[200px] h-[20px] rounded-full" />}
             </h2>
-            <h2 className="text-lg flex items-center gap-2 line-clamp-1">
+            <h2 className="text-base flex items-center gap-2 line-clamp-2">
               <strong>Job Description:</strong>
               {interviewData?.jobDesc || <Skeleton className="w-[200px] h-[20px] rounded-full" />}
             </h2>
-            <h2 className="text-lg flex items-center gap-2 line-clamp-1">
+            <h2 className="text-base flex items-center gap-2 line-clamp-1">
               <strong>Years of Experience:</strong>
               {interviewData?.jobExperience || <Skeleton className="w-[50px] h-[20px] rounded-full" />}
             </h2>
@@ -114,17 +114,25 @@ const Page: React.FC<PageProps> = ({ params }) => {
             />
           ) : (
             <div>
-              <WebcamIcon className="h-72 w-full my-7 p-20 bg-secondary rounded-lg border" />
+              <WebcamIcon className="h-fit w-full my-7 p-20 bg-secondary rounded-lg border" />
               <Button onClick={() => setWebCamEnabled(true)} className="w-full bg-secondary text-slate-800">
                 Enable Web Cam and Microphone
               </Button>
             </div>
           )}
+
+          <div className="md:hidden flex mt-2 justify-end items-end">
+            {interviewId && (
+              <Link href={`/interview/${interviewId}/start`}>
+                <Button>Start Interview</Button>
+              </Link>
+            )}
+          </div>
         </div>
       </section>
 
       {/* Start Interview Button */}
-      <div className="flex mt-2 justify-end items-end">
+      <div className="md:flex hidden mt-2 justify-end items-end">
         {interviewId && (
           <Link href={`/interview/${interviewId}/start`}>
             <Button>Start Interview</Button>

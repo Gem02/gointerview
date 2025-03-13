@@ -27,8 +27,8 @@ const QuestionSection: React.FC<QuestionSectionProps> = ({
   onQuestionClick,
 }) => {
   return (
-    <div className="p-5 border rounded-lg my-10">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+    <div className="p-5 border rounded-lg sm:my-10 mb-5">
+      <div className="flex gap-1 flex-wrap sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-5">
         {mockInterviewQuestion.map((_, index) => (
           <h2
             key={index}
@@ -37,7 +37,7 @@ const QuestionSection: React.FC<QuestionSectionProps> = ({
               activeQuestionIndex === index && "bg-primary text-white"
             }`}
           >
-            Question {index + 1}
+            Q. {index + 1}
           </h2>
         ))}
       </div>
@@ -53,7 +53,7 @@ const QuestionSection: React.FC<QuestionSectionProps> = ({
         }
       />
 
-      <div className="border rounded-lg p-5 bg-blue-100 mt-20">
+      <div className="border rounded-lg p-5 bg-blue-100 mt-5 sm:mt-20">
         <h2 className="flex gap-2 items-center text-primary">
           <Lightbulb />
           <strong>Note:</strong>
