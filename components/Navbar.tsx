@@ -7,7 +7,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Menu, X } from "lucide-react";
-import { signIn } from "next-auth/react";
 
 function Navbar() {
   const path = usePathname();
@@ -87,7 +86,7 @@ function Navbar() {
                 )}
               </div>
             ) : (
-              <button className="bg-none text-sm font-semibold" onClick={() => signIn("google", {callbackUrl: "/dashboard"})}>Sign In</button>
+              <Link href={'/signin'}>Signin</Link>
             )}
           </div>
           
